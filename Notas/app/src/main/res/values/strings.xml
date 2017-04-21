@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Fiap Notes</string>
+    <string name="email">Email</string>
+    <string name="senha">Senha</string>
+    <string name="login">Logar</string>
+    <string name="teste">Teste</string>
+    <string name="login_invalido">Preencha os dados de login corretamente!</string>
+    <string name="fiap">FIAP</string>
+    <string name="primeiro_acesso">Primeiro Acesso</string>
+    <string name="nome">Nome</string>
+    <string name="sobrenome">Sobrenome</string>
+    <string name="feminino">Feminino</string>
+    <string name="masculino">Masculino</string>
+    <string name="data_de_nascimento">Data de Nascimento</string>
+    <string name="gravar_dados">Gravar Dados</string>
+    <string name="fechar_retornar">Fechar e Retornar</string>
+    <string name="excluir_dados">Excluir Dados</string>
+    <string name="carregar_dados">Carregar Dados</string>
+    <string name="verificar_dados">Verificar Dados</string>
+    <string name="gravar_arquivo">Gravar Arquivo</string>
+    <string name="ler_arquivo">Ler Arquivo</string>
+    <string name="excluir_arquivo">Excluir Arquivo</string>
+    <string name="preenche_corretament">Preencha corretamente os campos!</string>
+    <string name="sharedPref">SharedPref</string>
+    <string name="salvando">Salvando...</string>
+    <string name="salvo_sucesso">Salvo com sucesso!</string>
+    <string name="sucesso">Dados carregados com sucesso!</string>
+</resources>

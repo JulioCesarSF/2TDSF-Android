@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.schin.notas.activitys.CadastraLoginActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
+
+            <EditText
+                android:id="@+id/edtNome"
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/nome"
+                android:inputType="textCapSentences" />
+
+            <EditText
+                android:id="@+id/edtSobrenome"
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sobrenome"
+                android:inputType="textCapSentences" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:id="@+id/rgSexo"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioFeminino"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/feminino" />
+
+                <RadioButton
+                    android:id="@+id/radioMasculino"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/masculino" />
+
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/edtDataNascimento"
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/data_de_nascimento"
+                android:inputType="date" />
+
+            <EditText
+                android:id="@+id/edtEmail"
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/edtSenha"
+                style="@style/AppTheme.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/senha"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/btnGravarDados"
+                style="@style/AppTheme.ButtomBlack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gravar_dados" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnExcluirDados"
+                    style="@style/AppTheme.ButtomBlackNoMargin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/excluir_dados" />
+
+                <Button
+                    android:id="@+id/btnCarregarDados"
+                    style="@style/AppTheme.ButtomBlackNoMargin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/carregar_dados" />
+
+                <Button
+                    android:id="@+id/btnVerificarDados"
+                    style="@style/AppTheme.ButtomBlackNoMargin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/verificar_dados" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnGravarArquivo"
+                    style="@style/AppTheme.ButtomBlackNoMargin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/gravar_arquivo" />
+
+                <Button
+                    android:id="@+id/btnLerArquivo"
+                    style="@style/AppTheme.ButtomBlackNoMargin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ler_arquivo" />
+
+                <Button
+                    android:id="@+id/btnExcluirArquivo"
+                    style="@style/AppTheme.ButtomBlackNoMargin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/excluir_arquivo" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnRetornar"
+                style="@style/AppTheme.ButtomBlack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fechar_retornar" />
+
+
+        </TableLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>
