@@ -19,7 +19,11 @@ import com.schin.notas.R;
 import com.schin.notas.utils.ArquivoDB;
 import com.schin.notas.utils.Chave;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 public class CadastraLoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,6 +31,11 @@ public class CadastraLoginActivity extends AppCompatActivity implements View.OnC
     private RadioGroup rg;
     private ArquivoDB arquivoDB;
     private ProgressDialog dialog;
+
+    private final String[] chaves = {
+            Chave.NOME.toString(), Chave.SOBRENOME.toString(), Chave.SEXO.toString(),
+            Chave.EMAIL.toString(), Chave.DATA_NASCIMENTO.toString(), Chave.SENHA.toString()
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +96,51 @@ public class CadastraLoginActivity extends AppCompatActivity implements View.OnC
             case R.id.btnRetornar:
                 fechareRetornar();
                 break;
+
+            case R.id.btnExcluirDados:
+                excluirDados();
+                break;
+
+            case R.id.btnCarregarDados:
+                carregarDados();
+                break;
+
+            case R.id.btnVerificarDados:
+                verificarDados();
+                break;
+
+            case R.id.btnGravarArquivo:
+
+                break;
+
+            case R.id.btnLerArquivo:
+
+                break;
+
+            case R.id.btnExcluirArquivo:
+
+                break;
+        }
+    }
+
+    private void verificarDados() {
+        HashMap<String, Boolean> l = arquivoDB.verificarTodasChaves(Arrays.asList(chaves));
+        int size = new HashSet(l.values()).size();
+        if(size == 1 && l.containsValue(true)){
+            display(getString(R.string.dados_ok));
+        }else if( size < 1 || l.containsValue(false)){
+            display(getString(R.string.dados_fail));
+        }
+    }
+
+    private void excluirDados() {
+        try {
+            arquivoDB.excluirChaves(Arrays.asList(
+                    chaves
+            ));
+            display(getString(R.string.dados_excluidos));
+        } catch (Exception e){
+            display(e.getMessage());
         }
     }
 
@@ -151,7 +205,7 @@ public class CadastraLoginActivity extends AppCompatActivity implements View.OnC
     }
 
     private void display(String msg){
-        Snackbar snackbar = Snackbar.make(getCurrentFocus(), msg, Snackbar.LENGTH_SHORT);
+        Snackbar snackbar = Snackbar.make(getWindow().getDecorView().getRootView(), msg, Snackbar.LENGTH_SHORT);
         snackbar.show();
     }
 

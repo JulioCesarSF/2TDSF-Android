@@ -25,4 +25,7 @@
     <string name="salvando">Salvando...</string>
     <string name="salvo_sucesso">Salvo com sucesso!</string>
     <string name="sucesso">Dados carregados com sucesso!</string>
+    <string name="dados_excluidos">Dados excluídos com sucesso!</string>
+    <string name="dados_ok">Dados OK</string>
+    <string name="dados_fail">Dados faltando.</string>
 </resources>

@@ -3,6 +3,7 @@ package com.schin.notas.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -27,6 +28,7 @@ public final class ArquivoDB {
     public static Context context;
 
     private static final String FILE_NAME = "notasPref";
+    private final String TAG = "arquivoDB";
 
     private ArquivoDB(){
         sharedPreferences = (sharedPreferences == null) ? context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE) : sharedPreferences;
@@ -70,11 +72,12 @@ public final class ArquivoDB {
     }
 
     public HashMap<String, Boolean> verificarTodasChaves(List<String> keys) {
-        HashMap<String, Boolean> resp = null;
+        HashMap<String, Boolean> resp = new HashMap<>();
 
         for (String key :
                 keys) {
-            resp.put(key, sharedPreferences.contains(key));
+            Log.d(TAG, key.concat(String.valueOf(verificarValor(key))));
+            resp.put(key, verificarValor(key));
         }
 
         return resp;

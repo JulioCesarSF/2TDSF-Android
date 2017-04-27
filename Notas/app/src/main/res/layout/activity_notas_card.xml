@@ -15,7 +15,7 @@
 
     <Button
         android:id="@+id/btnRetornar"
-        style="@style/AppTheme.ButtomAccent"
+        style="@style/AppTheme.ButtomBlack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Fechar e Retornar" />
