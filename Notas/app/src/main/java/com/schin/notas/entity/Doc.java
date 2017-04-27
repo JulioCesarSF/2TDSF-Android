@@ -2,26 +2,26 @@ package com.schin.notas.entity;
 
 public class Doc {
 
-    private String id;
-    private String rev;
+    private String _id;
+    private String _rev;
     private String titulo;
     private String conteudo;
     private String assunto;
 
     public String getId() {
-        return id;
+        return _id;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this._id = id;
     }
 
     public String getRev() {
-        return rev;
+        return _rev;
     }
 
     public void setRev(String rev) {
-        this.rev = rev;
+        this._rev = rev;
     }
 
     public String getTitulo() {

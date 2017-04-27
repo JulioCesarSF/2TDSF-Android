@@ -6,7 +6,7 @@ public class CloudantResponse {
 
     private Integer totalRows;
     private Integer offset;
-    private List<Row> rows = null;
+    private Row[] rows = null;
 
     public Integer getTotalRows() {
         return totalRows;
@@ -24,11 +24,11 @@ public class CloudantResponse {
         this.offset = offset;
     }
 
-    public List<Row> getRows() {
+    public Row[] getRows() {
         return rows;
     }
 
-    public void setRows(List<Row> rows) {
+    public void setRows(Row[] rows) {
         this.rows = rows;
     }
 
