@@ -16,13 +16,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activitys.NotasCardActivity">
+        <activity android:name=".activities.NotasCardActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".activitys.SplashActivity"
+            android:name=".activities.SplashActivity"
             android:theme="@style/AppCompat.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activitys.CadastraLoginActivity">
+        <activity android:name=".activities.CadastraLoginActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>

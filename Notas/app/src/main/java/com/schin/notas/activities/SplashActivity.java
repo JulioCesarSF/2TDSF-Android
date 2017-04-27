@@ -1,4 +1,4 @@
-package com.schin.notas.activitys;
+package com.schin.notas.activities;
 
 import android.content.Intent;
 import android.os.Handler;

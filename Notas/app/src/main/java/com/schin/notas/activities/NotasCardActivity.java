@@ -1,4 +1,4 @@
-package com.schin.notas.activitys;
+package com.schin.notas.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +15,6 @@ import com.schin.notas.utils.CloudantRequestInterface;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

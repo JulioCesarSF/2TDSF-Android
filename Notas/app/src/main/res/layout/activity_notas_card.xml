@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.schin.notas.activitys.NotasCardActivity">
+    tools:context="com.schin.notas.activities.NotasCardActivity">
 
     <TextView
         android:layout_width="match_parent"

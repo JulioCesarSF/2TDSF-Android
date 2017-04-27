@@ -1,4 +1,4 @@
-package com.schin.notas.activitys;
+package com.schin.notas.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

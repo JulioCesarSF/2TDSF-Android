@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.schin.notas.activitys.CadastraLoginActivity;
-import com.schin.notas.activitys.NotasCardActivity;
+import com.schin.notas.activities.CadastraLoginActivity;
+import com.schin.notas.activities.NotasCardActivity;
 import com.schin.notas.utils.ArquivoDB;
 import com.schin.notas.utils.Chave;
 
