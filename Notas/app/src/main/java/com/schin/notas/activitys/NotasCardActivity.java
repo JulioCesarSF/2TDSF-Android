@@ -32,9 +32,12 @@ public class NotasCardActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notas_card);
-
         initViews();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         carregaNotas();
     }
 
