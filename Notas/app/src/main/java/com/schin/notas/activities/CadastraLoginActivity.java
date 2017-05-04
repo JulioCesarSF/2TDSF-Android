@@ -110,18 +110,48 @@ public class CadastraLoginActivity extends AppCompatActivity implements View.OnC
                 break;
 
             case R.id.btnGravarArquivo:
-
+                gavarArquivo();
                 break;
 
             case R.id.btnLerArquivo:
-
+                lerArquivo();
                 break;
 
             case R.id.btnExcluirArquivo:
-
+                excluirArquivo();
                 break;
         }
     }
+
+    private void excluirArquivo() {
+        try{
+            arquivoDB.excluirArquivo();
+            display(getString(R.string.dados_excluidos));
+        }catch (Exception e){
+            display(e.getMessage());
+        }
+    }
+
+    private void lerArquivo() {
+        String dados;
+
+        try{
+            dados = arquivoDB.lerArquivo();
+        }catch (Exception e){
+            display(e.getMessage());
+        }
+    }
+
+    private void gavarArquivo() {
+        String dados = gravarDados();
+        try{
+            arquivoDB.gravarArquivo(dados);
+            display(getString(R.string.dados_ok));
+        }catch (Exception e ){
+            display(e.getMessage());
+        }
+    }
+
 
     private boolean verificarDados() {
         HashMap<String, Boolean> l = arquivoDB.verificarTodasChaves(Arrays.asList(chaves));
@@ -148,39 +178,40 @@ public class CadastraLoginActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private void gravarDados() {
+    private String gravarDados() {
         if (!validar()) {
             display(getString(R.string.preenche_corretament));
-            return;
+            return "";
         }
+
+        String dadosTotal;
 
         progress(getString(R.string.sharedPref), getString(R.string.salvando));
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                HashMap<String, String> map = new HashMap<>();
-                map.put(Chave.NOME.toString(), edtNome.getText().toString());
-                map.put(Chave.SOBRENOME.toString(), edtSobrenome.getText().toString());
-                map.put(Chave.DATA_NASCIMENTO.toString(), edtDataNascimento.getText().toString());
-                map.put(Chave.EMAIL.toString(), edtEmail.getText().toString());
-                map.put(Chave.SENHA.toString(), edtSenha.getText().toString());
+        HashMap<String, String> map = new HashMap<>();
+        map.put(Chave.NOME.toString(), edtNome.getText().toString());
+        map.put(Chave.SOBRENOME.toString(), edtSobrenome.getText().toString());
+        map.put(Chave.DATA_NASCIMENTO.toString(), edtDataNascimento.getText().toString());
+        map.put(Chave.EMAIL.toString(), edtEmail.getText().toString());
+        map.put(Chave.SENHA.toString(), edtSenha.getText().toString());
 
-                int sexoId = rg.getCheckedRadioButtonId();
-                RadioButton rb = (RadioButton) findViewById(sexoId);
-                map.put(Chave.SEXO.toString(), rb.getText().toString());
+        int sexoId = rg.getCheckedRadioButtonId();
+        RadioButton rb = (RadioButton) findViewById(sexoId);
+        map.put(Chave.SEXO.toString(), rb.getText().toString());
 
-                arquivoDB.gravarChaves(map);
+        arquivoDB.gravarChaves(map);
 
-                dialog.dismiss();
-                display(getString(R.string.salvo_sucesso));
-            }
-        }, 1000);
+        dadosTotal = map.toString();
+
+        dialog.dismiss();
+        display(getString(R.string.salvo_sucesso));
+
+
+        return dadosTotal;
     }
 
     private void carregarDados() {
-        if(!verificarDados()){
+        if (!verificarDados()) {
             return;
         }
         edtNome.setText(arquivoDB.retornarValor(Chave.NOME.toString()));
@@ -199,6 +230,8 @@ public class CadastraLoginActivity extends AppCompatActivity implements View.OnC
                 }
             }
         }
+
+
     }
 
     //método da aula
@@ -222,7 +255,7 @@ public class CadastraLoginActivity extends AppCompatActivity implements View.OnC
                 !TextUtils.isEmpty(nascimento) &&
                 (sexoId != -1)) {
             dadosOK = true;
-        }else{
+        } else {
             display(getString(R.string.verificar_dados));
         }
         return dadosOK;
