@@ -57,11 +57,11 @@ public class CadastraLoginActivity extends AppCompatActivity implements View.OnC
     }
 
     private void initViews() {
-        edtNome = (EditText)findViewById(R.id.edtNome);
-        edtSobrenome = (EditText)findViewById(R.id.edtSobrenome);
-        edtDataNascimento = (EditText)findViewById(R.id.edtDataNascimento);
-        edtEmail = (EditText)findViewById(R.id.edtEmail);
-        edtSenha = (EditText)findViewById(R.id.edtSenha);
+        edtNome = (EditText) findViewById(R.id.edtNome);
+        edtSobrenome = (EditText) findViewById(R.id.edtSobrenome);
+        edtDataNascimento = (EditText) findViewById(R.id.edtDataNascimento);
+        edtEmail = (EditText) findViewById(R.id.edtEmail);
+        edtSenha = (EditText) findViewById(R.id.edtSenha);
 
         Button btnGravarDados = (Button) findViewById(R.id.btnGravarDados);
         Button btnExcluirDados = (Button) findViewById(R.id.btnExcluirDados);
@@ -83,12 +83,12 @@ public class CadastraLoginActivity extends AppCompatActivity implements View.OnC
         btnExcluirArquivo.setOnClickListener(this);
         btnRetornar.setOnClickListener(this);
 
-        rg = (RadioGroup)findViewById(R.id.rgSexo);
+        rg = (RadioGroup) findViewById(R.id.rgSexo);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btnGravarDados:
                 gravarDados();
                 break;
@@ -123,14 +123,18 @@ public class CadastraLoginActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private void verificarDados() {
+    private boolean verificarDados() {
         HashMap<String, Boolean> l = arquivoDB.verificarTodasChaves(Arrays.asList(chaves));
         int size = new HashSet(l.values()).size();
-        if(size == 1 && l.containsValue(true)){
+        if (size == 1 && l.containsValue(true)) {
             display(getString(R.string.dados_ok));
-        }else if( size < 1 || l.containsValue(false)){
+            return true;
+        } else if (size < 1 || l.containsValue(false)) {
             display(getString(R.string.dados_fail));
+            return false;
         }
+
+        return false;
     }
 
     private void excluirDados() {
@@ -139,13 +143,13 @@ public class CadastraLoginActivity extends AppCompatActivity implements View.OnC
                     chaves
             ));
             display(getString(R.string.dados_excluidos));
-        } catch (Exception e){
+        } catch (Exception e) {
             display(e.getMessage());
         }
     }
 
     private void gravarDados() {
-        if(!validar()) {
+        if (!validar()) {
             display(getString(R.string.preenche_corretament));
             return;
         }
@@ -164,10 +168,11 @@ public class CadastraLoginActivity extends AppCompatActivity implements View.OnC
                 map.put(Chave.SENHA.toString(), edtSenha.getText().toString());
 
                 int sexoId = rg.getCheckedRadioButtonId();
-                RadioButton rb = (RadioButton)findViewById(sexoId);
+                RadioButton rb = (RadioButton) findViewById(sexoId);
                 map.put(Chave.SEXO.toString(), rb.getText().toString());
 
                 arquivoDB.gravarChaves(map);
+
                 dialog.dismiss();
                 display(getString(R.string.salvo_sucesso));
             }
@@ -175,6 +180,9 @@ public class CadastraLoginActivity extends AppCompatActivity implements View.OnC
     }
 
     private void carregarDados() {
+        if(!verificarDados()){
+            return;
+        }
         edtNome.setText(arquivoDB.retornarValor(Chave.NOME.toString()));
         edtSobrenome.setText(arquivoDB.retornarValor(Chave.SOBRENOME.toString()));
         edtEmail.setText(arquivoDB.retornarValor(Chave.EMAIL.toString()));
@@ -184,32 +192,60 @@ public class CadastraLoginActivity extends AppCompatActivity implements View.OnC
         String sexo = arquivoDB.retornarValor(Chave.SEXO.toString());
 
         int count = rg.getChildCount();
-        for(int i  =0; i < count; i++){
-            if(rg.getChildAt(i) instanceof RadioButton){
-                if(((RadioButton) rg.getChildAt(i)).getText().toString().equals(sexo)){
+        for (int i = 0; i < count; i++) {
+            if (rg.getChildAt(i) instanceof RadioButton) {
+                if (((RadioButton) rg.getChildAt(i)).getText().toString().equals(sexo)) {
                     ((RadioButton) rg.getChildAt(i)).setChecked(true);
                 }
             }
         }
     }
 
-    private boolean validar(){
-        if(Patterns.EMAIL_ADDRESS.matcher(edtEmail.getText().toString()).matches()
+    //método da aula
+    private boolean capturarDados() {
+        String nome, sobrenome, nascimento, email, senha, sexo;
+        boolean dadosOK = false;
+
+        nome = edtNome.getText().toString();
+        sobrenome = edtSobrenome.getText().toString();
+        nascimento = edtDataNascimento.getText().toString();
+        email = edtEmail.getText().toString();
+        senha = edtSenha.getText().toString();
+
+        int sexoId = rg.getCheckedRadioButtonId();
+        RadioButton rb = (RadioButton) findViewById(sexoId);
+
+        if (Patterns.EMAIL_ADDRESS.matcher(email).matches() &&
+                !TextUtils.isEmpty(senha) &&
+                !TextUtils.isEmpty(nome) &&
+                !TextUtils.isEmpty(sobrenome) &&
+                !TextUtils.isEmpty(nascimento) &&
+                (sexoId != -1)) {
+            dadosOK = true;
+        }else{
+            display(getString(R.string.verificar_dados));
+        }
+        return dadosOK;
+    }
+
+    private boolean validar() {
+        if (Patterns.EMAIL_ADDRESS.matcher(edtEmail.getText().toString()).matches()
                 && !TextUtils.isEmpty(edtNome.getText().toString())
                 && !TextUtils.isEmpty(edtSobrenome.getText().toString())
                 && !TextUtils.isEmpty(edtSenha.getText().toString())
-                && !TextUtils.isEmpty(edtDataNascimento.getText().toString())){
+                && !TextUtils.isEmpty(edtDataNascimento.getText().toString())
+                && rg.getCheckedRadioButtonId() != -1) {
             return true;
         }
         return false;
     }
 
-    private void display(String msg){
+    private void display(String msg) {
         Snackbar snackbar = Snackbar.make(getWindow().getDecorView().getRootView(), msg, Snackbar.LENGTH_SHORT);
         snackbar.show();
     }
 
-    private void progress(String title, String msg){
+    private void progress(String title, String msg) {
         dialog = ProgressDialog.show(this, title, msg, true);
     }
 

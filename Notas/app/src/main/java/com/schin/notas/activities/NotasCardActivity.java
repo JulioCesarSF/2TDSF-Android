@@ -1,6 +1,7 @@
 package com.schin.notas.activities;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +27,8 @@ public class NotasCardActivity extends AppCompatActivity implements View.OnClick
 
     private Button btnRetornar;
     private ArrayList<Row> rows;
+    private final String TAG = "NotasCard";
+    private final String URL_API = "https://33774666-fc8b-406f-b354-2622d4b74751-bluemix.cloudant.com/fiap-notas/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +66,7 @@ public class NotasCardActivity extends AppCompatActivity implements View.OnClick
     private void carregaNotas() {
         Retrofit retrofit = new Retrofit
                 .Builder()
-                .baseUrl("https://33774666-fc8b-406f-b354-2622d4b74751-bluemix.cloudant.com/fiap-notas/")
+                .baseUrl(URL_API)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -76,15 +79,20 @@ public class NotasCardActivity extends AppCompatActivity implements View.OnClick
                 rows = new ArrayList<>(Arrays.asList(cloudantResponse.getRows()));
 
                 for (Row item : rows) {
-                    Log.d("Nota", item.getDoc().getAssunto());
+                    Log.d(TAG, item.getDoc().getAssunto());
                 }
 
             }
 
             @Override
             public void onFailure(Call<CloudantResponse> call, Throwable t) {
-
+                display(t.getMessage());
             }
         });
+    }
+
+    private void display(String msg){
+        Snackbar snackbar = Snackbar.make(getWindow().getDecorView().getRootView(), msg, Snackbar.LENGTH_SHORT);
+        snackbar.show();
     }
 }
